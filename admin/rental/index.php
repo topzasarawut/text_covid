@@ -1,0 +1,140 @@
+<?php 
+include_once('../../php/connect.php');
+session_start();
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ADMIN Car Rental Office By Neverdie ๘ Studio</title>
+    <!-- ติดตั้งการใช้งาน CSS ต่างๆ -->
+    <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Prompt&display=swap" rel="stylesheet">
+    <style>body,section{font-family: 'Prompt', sans-serif;}</style>
+    
+</head>
+<body>
+    <!-- Section Navbar -->
+    <?php include_once('includes/navbar.php') ?>
+
+    <section class="bg-light min-vh-100">
+		<br><br><br>
+		<div class="container-fluid">
+			<div class="row mt-3">
+				<div class="col-sm-3 col-md-2">
+					<div class="list-group">
+						<a href="../index.php" class="list-group-item list-group-item-action">Home</a>
+						<a href="../car" class="list-group-item list-group-item-action">รถยนต์</a>
+						<a href="../user" class="list-group-item list-group-item-action">สมาชิก</a>
+						<a href="#" class="list-group-item list-group-item-action active">การเช่ารถ</a>
+						<a href="../../index.php" class="list-group-item list-group-item-action">ไปยังหน้าการเช่ารถยนต์</a>
+					</div>
+				</div>
+				<div class="col">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="#">Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page">Rental</li>
+						</ol>
+					</nav>
+
+					<div class="row mt-3"> 
+						<div class="col">
+							<div class="card">
+								<div class="card-header d-flex justify-content-between align-items-center">
+									<h4>Rental Manager</h4>
+									<!-- <div class="d-flex">
+									<a class="btn btn-success" href="create.php" role="button">+ Add Rental</a>
+									</div> -->
+								</div>
+								<div class="card-body">
+									<p>การเช่ารถยนต์ทั้งหมด</p>
+
+									<?php
+										// $sql = "SELECT users.username, cars.carreg, created_at, money, status_re
+										// FROM users, rental, cars
+										// WHERE users.idcard = rental.idcard AND cars.carid=rental.carid ORDER BY created_at"; 
+										
+										// $result = $conn->query($sql);
+										// echo $sql;
+										// exit;
+
+										$sql = "SELECT * FROM rental"; 
+										$result = $conn->query($sql);
+										?>
+
+									<table class="table">
+										<thead>
+											<tr>
+												<th scope="col">#</th>
+												<th scope="col">idcard</th>
+												<th scope="col">carid</th>
+												<th scope="col">created_at</th>
+												<th scope="col">money</th>
+												<th scope="col">status</th>
+												<th scope="col">ให้สิทธิ์</th>
+											</tr>
+										</thead>
+										<tbody>
+
+										<?php 
+											$num = 0;
+											while ($row = $result->fetch_assoc()) {
+											$num++;
+										?>
+
+											<tr>
+												<td><?php echo $num; ?></td>
+												<td><?php echo $row['idcard']; ?></td>
+												<td><?php echo $row['carid']; ?></td>
+												<td><?php echo $row['created_at']; ?></td>
+												<td><?php echo $row['money']; ?></td>
+												<td><?php echo $row['status_re']; ?></td>
+												<td>
+												<a href="form-edit.php?id=<?php echo $row['id']; ?>" class="btn btn-sm btn-warning text-white">
+													<i class="fas fa-edit"></i> ให้สิทธิ์
+												</a> 
+												</td>
+												<!-- <td>
+												<a href="delete.php" class="btn btn-sm btn-danger text-white">
+													<i class="fas fa-delete"></i> ลบ
+												</a> 
+												</td> -->
+											</tr>
+										<?php } ?>
+										</tbody>
+									</table>
+									<nav aria-label="Page navigation example">
+										<ul class="pagination">
+											<li class="page-item"><a class="page-link" href="#">Previous</a></li>
+											<li class="page-item active"><a class="page-link" href="#">1</a></li>
+											<li class="page-item"><a class="page-link" href="#">2</a></li>
+											<li class="page-item"><a class="page-link" href="#">3</a></li>
+											<li class="page-item"><a class="page-link" href="#">Next</a></li>
+										</ul>
+									</nav>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</section>
+
+    <!-- Section Footer -->
+    <?php include_once('includes/footer.php') ?>
+
+
+    <!-- ติดตั้งการใช้งาน Javascript ต่างๆ -->
+    <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../../node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <script src="../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+
+     
+</body>
+</html>
